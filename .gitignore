@@ -1,0 +1,34 @@
+# Local environments and generated files
+**/.venv/
+**/__pycache__/
+*.py[cod]
+**/.pytest_cache/
+**/.pyinstaller/
+**/build/
+**/dist/
+*.log
+*.bak
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+
+# Keil user settings and build outputs (release HEX is stored separately)
+*.uvguix.*
+*.uvoptx
+*.lst
+**/.vscode/
+**/DebugConfig/
+firmware/DRIVE/MDK-ARM/Drop_Drive/
+
+# Unused CMSIS SDK documentation, examples and precompiled libraries.
+# Keep project-referenced Include/, Device/ and original licensing.
+firmware/DRIVE/Drivers/CMSIS/Core/
+firmware/DRIVE/Drivers/CMSIS/Core_A/
+firmware/DRIVE/Drivers/CMSIS/docs/
+firmware/DRIVE/Drivers/CMSIS/DSP/
+firmware/DRIVE/Drivers/CMSIS/Lib/
+firmware/DRIVE/Drivers/CMSIS/NN/
+firmware/DRIVE/Drivers/CMSIS/RTOS/
+firmware/DRIVE/Drivers/CMSIS/RTOS2/

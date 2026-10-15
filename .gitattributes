@@ -1,0 +1,6 @@
+# Preserve the validated source files' existing encodings and line endings.
+* -text
+*.png binary
+*.jpg binary
+*.mp4 binary
+*.hex -diff
