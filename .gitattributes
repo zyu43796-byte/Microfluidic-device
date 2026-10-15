@@ -4,3 +4,11 @@
 *.jpg binary
 *.mp4 binary
 *.hex -diff
+*.SchDoc binary
+*.schdoc binary
+*.PcbDoc binary
+*.SchLib binary
+*.PcbLib binary
+*.pdf binary
+*.xlsx binary
+*.docx binary

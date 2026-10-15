@@ -1,6 +1,6 @@
 # Microfluidic Device · xiuyun
 
-数字微流控设备的 STM32 主控固件与 Windows / PyQt5 上位机。
+数字微流控设备的四块板硬件设计、STM32 主控固件与 Windows / PyQt5 上位机。
 
 当前使用范围内的电极驱动、液滴移动、灯带、磁杆及上位机功能已由设备所有者完成联调。**荧光与加热暂未启用，不属于本次完成验证的功能。**
 
@@ -10,6 +10,7 @@
 
 | 目录 | 内容 |
 |---|---|
+| `hardware/Drop_Board/` | 1–4号板的Altium原理图、PCB、元件库、PDF及现有制造资料 |
 | `firmware/DRIVE/` | STM32F407 主控源码、CubeMX配置、Keil工程及驱动依赖 |
 | `firmware/prebuilt/Drop_Drive.hex` | 从当前使用工程保存的烧录文件 |
 | `host/` | 上位机源码、测试、依赖及打包配置 |
@@ -17,6 +18,10 @@
 | `docs/` | 界面预览与文件校验信息 |
 
 本仓库保存当前主控工程，不包含其他板卡的历史实验固件。历史维护工具在 `firmware/DRIVE/tools/`，其README注明了与最终固件不兼容的旧调试命令。
+
+## 硬件设计
+
+使用 Altium Designer 打开各板目录中的 `Main_board1.PrjPcb` 至 `Main_board4.PrjPcb`。无需安装Altium也可查看同目录的PDF原理图。详见 [硬件文件说明](hardware/README.md)。
 
 ## 上位机运行
 

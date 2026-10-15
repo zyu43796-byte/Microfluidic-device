@@ -32,3 +32,8 @@ firmware/DRIVE/Drivers/CMSIS/Lib/
 firmware/DRIVE/Drivers/CMSIS/NN/
 firmware/DRIVE/Drivers/CMSIS/RTOS/
 firmware/DRIVE/Drivers/CMSIS/RTOS2/
+
+# Altium local history and auto-generated project structure
+hardware/**/History/
+hardware/**/Project Logs*/
+hardware/**/*.PrjPcbStructure

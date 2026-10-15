@@ -1,0 +1,910 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 { 
+			font-family : sans-serif;
+			color : white;
+			background-color : #21489e;
+			padding: 0.3em;
+		}
+		body { 
+			font-family : verdana;
+		}
+		td, th {  
+			padding: 0.5em;
+			text-align : center;
+			width : 18%;	
+		}
+		th { 
+			background-color : #A6CAF0;
+		
+		}
+		th.column1, td.column1 { 
+			text-align: left;
+			width : auto; 
+		}
+		table { 
+			width : 100%; 
+		}
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3 {
+			padding-top : 0.1em;
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width : auto;
+			vertical-align: top
+		}
+		.front_matter_column1 {
+			text-align : right;
+		}
+		.total_column1, .total_column {
+			font-weight : bold;	
+		}
+		.total_column1 {
+			text-align : right;
+		}
+		.front_matter_column2 {
+			text-align : center;
+		}
+		.front_matter_column3 {
+			text-align : left;
+		}
+		.warning, .error { 
+			color : red;
+			font-weight : bold;
+		}	
+		tr.onmouseout_odd { 
+			background-color : #EEEEE0 
+		}
+		tr.onmouseout_even { 
+			background-color : #F3F3E3   
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : lightYellow 
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #008000 
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+			
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);		
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {	
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}	
+	</script><title>Net Status Report</title>
+</head>
+<body onload="document.getElementById('radio_mil').click()"><img ALT="Altium" src="
+			file://D:\Program Files C\AD13\ducument\Altium\AD13\Templates\AD-rgb_logo_223x64.gif
+		"><a href="dxpprocess://Client:SetupPreferences?Server=PCB|PageName=Reports" class="customize"><acronym title="dxpprocess://Client:SetupPreferences?Server=PCB|PageName=Reports">customize</acronym></a><h1>Net Status Report</h1>
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">2026/3/2</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">23:29:19</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3"><a href="file:///E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc" class="file"><acronym title="E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc">E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc</acronym></a></td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Units</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">
+<form><input type="radio" name="radio_units" id="radio_mm" onclick="changeUnits(this, 'mm')">mm<input type="radio" name="radio_units" id="radio_mil" onclick="changeUnits(this, 'mil')">mils</form>
+</td>
+</tr>
+</table>
+<hr><a name="IDC5LQSMRVJ5T5J3SCO0CHTHMYTBRDEGX5GWUAGVOGAJQSXZURS00B"><table>
+<tr>
+<th class="column1">Nets</th>
+<th class="column2">Layer</th>
+<th class="column3">Length</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">5V</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="27304695">2730.47mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">DVDD12</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="5000826">500.083mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">GND</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="71041104">7104.11mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">HUB_CC/GPIO1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC14_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="3217028">321.703mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC1_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC1_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="1241832">124.183mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC22_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="6239262">623.926mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC40_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="3989170">398.917mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC41_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="3048510">304.851mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC42_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="2833016">283.302mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC44_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="3329454">332.945mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC46_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="36112797">3611.28mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC5_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="2647284">264.728mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC65_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC65_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="1344552">134.455mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC69_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="3127672">312.767mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC76_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="14251013">1425.101mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC85_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="1269508">126.951mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetC94_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="2808905">280.891mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetD10_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetD11_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetD1_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetD8_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="38962579">3896.258mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetH1_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="6575829">657.583mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetH1_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4281345">428.135mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13873.196mil|Location2.X=14117.471mil|Location1.Y=5677.191mil|Location2.Y=6078.219mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13873.196mil|Location2.X=14117.471mil|Location1.Y=5677.191mil|Location2.Y=6078.219mil|Absolute=True">NetH2_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4970147">497.015mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13873.196mil|Location2.X=14193.471mil|Location1.Y=5678.191mil|Location2.Y=6178.219mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13873.196mil|Location2.X=14193.471mil|Location1.Y=5678.191mil|Location2.Y=6178.219mil|Absolute=True">NetH2_3</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="6526858">652.686mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetH3_3</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="7155368">715.537mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetK1_8</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="5416449">541.645mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetLED1_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="746569">74.657mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetLED2_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="718995">71.9mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetLED5_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="1080251">108.025mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetP10_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="25806018">2580.602mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetP10_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="25575479">2557.548mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetP10_3</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="7942020">794.202mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetP10_4</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="26765012">2676.501mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13625.015mil|Location2.X=14193.471mil|Location1.Y=3246.62mil|Location2.Y=5653.191mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13625.015mil|Location2.X=14193.471mil|Location1.Y=3246.62mil|Location2.Y=5653.191mil|Absolute=True">NetP10_5</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="26123752">2612.375mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetP10_6</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="62922148">6292.215mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13675.723mil|Location2.X=14117.471mil|Location1.Y=3246.62mil|Location2.Y=5652.191mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13675.723mil|Location2.X=14117.471mil|Location1.Y=3246.62mil|Location2.Y=5652.191mil|Absolute=True">NetP10_7</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="26178958">2617.896mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetP10_8</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="63581295">6358.13mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetP1_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="1780000">178mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetP3_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetQ1_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="919573">91.957mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetQ2_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetQ2_3</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetR16_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4445504">444.55mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetR17_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4278204">427.82mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetR2_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="2611845">261.185mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetR43_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="3102851">310.285mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetR45_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="9870209">987.021mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetR48_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="1107642">110.764mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetR6_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="824454">82.445mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">NetR8_1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="774771">77.477mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">OLED_CS</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">OLED_DC</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">OLED_RES</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">OVCUR#</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="16321760">1632.176mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11069.928mil|Location2.X=11381.03mil|Location1.Y=7692.88mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11069.928mil|Location2.X=11381.03mil|Location1.Y=7692.88mil|Location2.Y=7962.258mil|Absolute=True">P1C_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4589759">458.976mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11015.928mil|Location2.X=11304.723mil|Location1.Y=7693.88mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11015.928mil|Location2.X=11304.723mil|Location1.Y=7693.88mil|Location2.Y=7962.258mil|Absolute=True">P1C_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4738175">473.818mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11079.723mil|Location2.X=11404.723mil|Location1.Y=7282.951mil|Location2.Y=8093.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11079.723mil|Location2.X=11404.723mil|Location1.Y=7282.951mil|Location2.Y=8093.979mil|Absolute=True">P1_AS_DX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="13670240">1367.024mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11091.723mil|Location2.X=11416.723mil|Location1.Y=7282.951mil|Location2.Y=8093.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11091.723mil|Location2.X=11416.723mil|Location1.Y=7282.951mil|Location2.Y=8093.979mil|Absolute=True">P1_AS_DX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="14558351">1455.835mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10965.723mil|Location2.X=11145.278mil|Location1.Y=7246.376mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10965.723mil|Location2.X=11145.278mil|Location1.Y=7246.376mil|Location2.Y=7962.258mil|Absolute=True">P1_SS_RX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="8803305">880.331mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10953.723mil|Location2.X=11145.278mil|Location1.Y=7232.597mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10953.723mil|Location2.X=11145.278mil|Location1.Y=7232.597mil|Location2.Y=7962.258mil|Absolute=True">P1_SS_RX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="8963638">896.364mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11058.723mil|Location2.X=11154.479mil|Location1.Y=7282.951mil|Location2.Y=7687.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11058.723mil|Location2.X=11154.479mil|Location1.Y=7282.951mil|Location2.Y=7687.038mil|Absolute=True">P1_SS_TX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4162104">416.21mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11015.928mil|Location2.X=11140.7mil|Location1.Y=7282.951mil|Location2.Y=7688.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11015.928mil|Location2.X=11140.7mil|Location1.Y=7282.951mil|Location2.Y=7688.038mil|Absolute=True">P1_SS_TX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4148165">414.817mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12123.156mil|Location2.X=12367.03mil|Location1.Y=7700.88mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12123.156mil|Location2.X=12367.03mil|Location1.Y=7700.88mil|Location2.Y=7962.258mil|Absolute=True">P2C_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4186326">418.633mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12096.928mil|Location2.X=12294.723mil|Location1.Y=7700.88mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12096.928mil|Location2.X=12294.723mil|Location1.Y=7700.88mil|Location2.Y=7962.258mil|Absolute=True">P2C_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4137169">413.717mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12397.723mil|Location1.Y=7108.676mil|Location2.Y=8089.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12397.723mil|Location1.Y=7108.676mil|Location2.Y=8089.979mil|Absolute=True">P2_AS_DX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="22181738">2218.174mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12409.723mil|Location1.Y=7096.676mil|Location2.Y=8089.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12409.723mil|Location1.Y=7096.676mil|Location2.Y=8089.979mil|Absolute=True">P2_AS_DX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="22698724">2269.872mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12060.29mil|Location1.Y=7192.176mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12060.29mil|Location1.Y=7192.176mil|Location2.Y=7962.258mil|Absolute=True">P2_SS_RX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="14250236">1425.024mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12130.81mil|Location1.Y=7180.176mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12130.81mil|Location1.Y=7180.176mil|Location2.Y=7962.258mil|Absolute=True">P2_SS_RX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="14451444">1445.144mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12135.723mil|Location1.Y=7154.691mil|Location2.Y=7695.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12135.723mil|Location1.Y=7154.691mil|Location2.Y=7695.038mil|Absolute=True">P2_SS_TX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="12742583">1274.258mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12181.519mil|Location1.Y=7142.691mil|Location2.Y=7695.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11304.168mil|Location2.X=12181.519mil|Location1.Y=7142.691mil|Location2.Y=7695.038mil|Absolute=True">P2_SS_TX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="12938176">1293.818mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13110.156mil|Location2.X=13351.03mil|Location1.Y=7702.88mil|Location2.Y=7963.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13110.156mil|Location2.X=13351.03mil|Location1.Y=7702.88mil|Location2.Y=7963.258mil|Absolute=True">P3C_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4067626">406.763mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13066.928mil|Location2.X=13278.723mil|Location1.Y=7702.88mil|Location2.Y=7963.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13066.928mil|Location2.X=13278.723mil|Location1.Y=7702.88mil|Location2.Y=7963.258mil|Absolute=True">P3C_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4024328">402.433mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11308.747mil|Location2.X=13232.919mil|Location1.Y=7065.691mil|Location2.Y=8087.848mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11308.747mil|Location2.X=13232.919mil|Location1.Y=7065.691mil|Location2.Y=8087.848mil|Absolute=True">P3_AS_DX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="26493810">2649.381mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11294.967mil|Location2.X=13157.723mil|Location1.Y=7053.691mil|Location2.Y=8086.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11294.967mil|Location2.X=13157.723mil|Location1.Y=7053.691mil|Location2.Y=8086.979mil|Absolute=True">P3_AS_DX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="27338710">2733.871mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11267.408mil|Location2.X=13114.81mil|Location1.Y=7006.691mil|Location2.Y=7963.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11267.408mil|Location2.X=13114.81mil|Location1.Y=7006.691mil|Location2.Y=7963.258mil|Absolute=True">P3_SS_RX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="25288838">2528.884mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11281.188mil|Location2.X=13047.29mil|Location1.Y=7018.691mil|Location2.Y=7963.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11281.188mil|Location2.X=13047.29mil|Location1.Y=7018.691mil|Location2.Y=7963.258mil|Absolute=True">P3_SS_RX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="24735466">2473.547mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11226.07mil|Location2.X=13151.519mil|Location1.Y=6948.691mil|Location2.Y=7697.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11226.07mil|Location2.X=13151.519mil|Location1.Y=6948.691mil|Location2.Y=7697.038mil|Absolute=True">P3_SS_TX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="25377163">2537.716mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11239.849mil|Location2.X=13110.238mil|Location1.Y=6960.691mil|Location2.Y=7697.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11239.849mil|Location2.X=13110.238mil|Location1.Y=6960.691mil|Location2.Y=7697.038mil|Absolute=True">P3_SS_TX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="25706886">2570.689mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10300.223mil|Location2.X=11223.377mil|Location1.Y=6863.006mil|Location2.Y=7124.431mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10300.223mil|Location2.X=11223.377mil|Location1.Y=6863.006mil|Location2.Y=7124.431mil|Absolute=True">P4_AS_DX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="10684231">1068.423mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10301.223mil|Location2.X=11209.597mil|Location1.Y=6953.691mil|Location2.Y=7124.431mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10301.223mil|Location2.X=11209.597mil|Location1.Y=6953.691mil|Location2.Y=7124.431mil|Absolute=True">P4_AS_DX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="10455758">1045.576mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">P4_SS_RXA</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">P4_SS_RXB</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">P4_SS_TXA</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">P4_SS_TXB</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">PWREN#</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="16816219">1681.622mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">PWR_CC/GPIO0/BC_EN#</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="5904766">590.477mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">RESET#</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="2114838">211.484mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">SMBCLK/SCL/EXCH#</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="8869372">886.937mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">SMBDAT/SDA</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="9270296">927.03mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">SPI_MISO_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">SPI_MOSI_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="21624029">2162.403mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">SPI_SCK_2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">SUSP/PDHUB#</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="5260746">526.075mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">SWITCH_IN01</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">SWITCH_IN02</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10155.156mil|Location2.X=10398.03mil|Location1.Y=7693.88mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10155.156mil|Location2.X=10398.03mil|Location1.Y=7693.88mil|Location2.Y=7962.258mil|Absolute=True">UPC_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4241904">424.19mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10124.928mil|Location2.X=10326.528mil|Location1.Y=7694.88mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10124.928mil|Location2.X=10326.528mil|Location1.Y=7694.88mil|Location2.Y=7962.258mil|Absolute=True">UPC_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4192373">419.237mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10217.228mil|Location2.X=11145.278mil|Location1.Y=7205.038mil|Location2.Y=8092.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10217.228mil|Location2.X=11145.278mil|Location1.Y=7205.038mil|Location2.Y=8092.979mil|Absolute=True">UP_AS_DX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="17919957">1791.996mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10145.935mil|Location2.X=11145.278mil|Location1.Y=7218.817mil|Location2.Y=8092.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10145.935mil|Location2.X=11145.278mil|Location1.Y=7218.817mil|Location2.Y=8092.979mil|Absolute=True">UP_AS_DX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="18108540">1810.854mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10096.106mil|Location2.X=11145.278mil|Location1.Y=7132.586mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10096.106mil|Location2.X=11145.278mil|Location1.Y=7132.586mil|Location2.Y=7962.258mil|Absolute=True">UP_SS_RX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="17533752">1753.375mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10027.825mil|Location2.X=11145.278mil|Location1.Y=7120.306mil|Location2.Y=7962.258mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10027.825mil|Location2.X=11145.278mil|Location1.Y=7120.306mil|Location2.Y=7962.258mil|Absolute=True">UP_SS_RX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="17543402">1754.34mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10166.328mil|Location2.X=11145.278mil|Location1.Y=7191.258mil|Location2.Y=7688.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10166.328mil|Location2.X=11145.278mil|Location1.Y=7191.258mil|Location2.Y=7688.038mil|Absolute=True">UP_SS_TX_N</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="13341099">1334.11mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10124.928mil|Location2.X=11145.278mil|Location1.Y=7177.479mil|Location2.Y=7689.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10124.928mil|Location2.X=11145.278mil|Location1.Y=7177.479mil|Location2.Y=7689.038mil|Absolute=True">UP_SS_TX_P</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="13548555">1354.856mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">USB_5V</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="19154368">1915.437mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">VBUS_OUT1</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="3786396">378.64mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">VBUS_OUT2</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="19785828">1978.583mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">VCC_3.3V</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="70809346">7080.935mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">VCC_5V</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="26964478">2696.448mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">VDD33</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="70888820">7088.882mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">VIN1_12V</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="1608855">160.886mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">VIN2_12V</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="4531855">453.186mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">VIN4_12V</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">VIN5_12V</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="0">0mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">VSW</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="469272">46.927mils
+			</a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">XI</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="3761749">376.175mils
+			</a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\%E5%88%98%E5%8D%9A%E5%A3%AB%E4%BA%8C%E7%89%88%E9%A1%B9%E7%9B%AE\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%B6%B2%E6%BB%B4%E7%94%B5%E8%B7%AF%E6%9D%BFWORK\%E6%9D%BF4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板4PCB_V1\BD4_dy_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">XO</acronym></a></td>
+<td class="column2">Signal Layers Only</td>
+<td class="column3"><a name="coordinate" value="3418205">341.821mils
+			</a></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br></body>
+</html>

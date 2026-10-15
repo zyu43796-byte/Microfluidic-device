@@ -1,0 +1,35 @@
+Protel Design System Design Rule Check
+PCB File : E:\刘博士二版项目\液滴电路板WORK\液滴电路板WORK\板1PCB_V1\BD1_yd_V1.0.PcbDoc
+Date     : 2026/3/4
+Time     : 21:53:34
+
+Processing Rule : Clearance Constraint (Gap=0.7mm) (InNetClass('HV Class')),(All)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=0.152mm) (Max=5.08mm) (Preferred=0.254mm) (All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Direct Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (InPadClass('All Pads'))
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=0.203mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+Rule Violations :0
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=0.152mm) (InComponent('USB1')),(All)
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=0.178mm) (InComponent('U4')),(All)
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=0.178mm) (InComponent('U11')),(All)
+Rule Violations :0
+
+
+Violations Detected : 0
+Time Elapsed        : 00:00:01
